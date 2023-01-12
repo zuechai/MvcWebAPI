@@ -1,15 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace dotnet_api.Models
+namespace dotnet_api.Models;
+
+public class Ingredient
 {
-    public class Ingredient
-    {
-        [Required]
-        public long Id { get; set; }
+    [Required]
+    public long Id { get; set; }
 
-        [Required]
-        public string? Name { get; set; }
+    [Required]
+    public string? Name { get; set; }
 
-        public ICollection<IngredientList>? IngredientLists { get; set; }
-    }
+    public ICollection<IngredientList>? IngredientLists { get; set; }
 }

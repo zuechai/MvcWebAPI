@@ -1,14 +1,19 @@
-namespace dotnet_api.Models
+using System.ComponentModel.DataAnnotations;
+
+namespace dotnet_api.Models;
+
+public class IngredientList
 {
-    public class IngredientList
-    {
-        public long Id { get; set; }
+    [Required]
+    public long Id { get; set; }
 
-        public string? Measurement { get; set; }
+    [Required]
+    public string? Measurement { get; set; }
 
-        public ICollection<Ingredient>? Ingredients { get; set; }
+    [Required]
+    public ICollection<Ingredient>? Ingredients { get; set; }
 
-        public long RecipeId { get; set; }
-        public Recipe? Recipe { get; set; }
-    }
+    [Required]
+    public long RecipeId { get; set; }
+    public Recipe? Recipe { get; set; }
 }
