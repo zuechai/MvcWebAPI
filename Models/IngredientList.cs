@@ -11,7 +11,10 @@ public class IngredientList
     public string? Measurement { get; set; }
 
     [Required]
-    public ICollection<Ingredient>? Ingredients { get; set; }
+    public Ingredient? Ingredient { get; set; }
+
+    public string? Preparation { get; set; }
+
 
     [Required]
     public long RecipeId { get; set; }

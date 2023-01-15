@@ -19,5 +19,8 @@ public class User
     [Required]
     public string? Email { get; set; }
 
+    [Timestamp]
+    public DateTime? CreatedAt { get; set; }
+
     public List<Recipe>? Recipes { get; set; }
 }

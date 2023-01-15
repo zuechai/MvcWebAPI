@@ -1,6 +1,9 @@
+using dotnet_api.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSqlServer<RecipeContext>("Data Source=localhost;Initial Catalog=RecipeIndex;Trusted_Connection=true;TrustServerCertificate=true;");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,5 +24,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.CreateDbIfNotExists();
 
 app.Run();
