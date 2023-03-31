@@ -11,7 +11,7 @@ public class RecipeContext : DbContext
 
     public DbSet<Recipe> Recipes => Set<Recipe>();
     public DbSet<Ingredient> Ingredients => Set<Ingredient>();
-    public DbSet<IngredientList> IngrdientsLists => Set<IngredientList>();
+    public DbSet<IngredientList> IngredientsLists => Set<IngredientList>();
     public DbSet<Method> Methods => Set<Method>();
     public DbSet<User> Users => Set<User>();
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnet_api.Data;
 
@@ -11,9 +12,11 @@ using dotnet_api.Data;
 namespace dotnetapi.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20230117164449_ChangeIngListName")]
+    partial class ChangeIngListName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +53,7 @@ namespace dotnetapi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("IngredientId")
-                        .IsRequired()
+                    b.Property<long>("IngredientId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Measurement")
@@ -65,6 +67,8 @@ namespace dotnetapi.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
 
                     b.HasIndex("RecipeId");
 
@@ -91,6 +95,8 @@ namespace dotnetapi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("Methods");
                 });
@@ -156,25 +162,53 @@ namespace dotnetapi.Migrations
 
             modelBuilder.Entity("dotnet_api.Models.IngredientList", b =>
                 {
-                    b.HasOne("dotnet_api.Models.Recipe", null)
-                        .WithMany("Ingredients")
+                    b.HasOne("dotnet_api.Models.Ingredient", "Ingredient")
+                        .WithMany("IngredientLists")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("dotnet_api.Models.Recipe", "Recipe")
+                        .WithMany("IngredientLists")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("dotnet_api.Models.Method", b =>
+                {
+                    b.HasOne("dotnet_api.Models.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("dotnet_api.Models.Recipe", b =>
                 {
-                    b.HasOne("dotnet_api.Models.User", null)
+                    b.HasOne("dotnet_api.Models.User", "User")
                         .WithMany("Recipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("dotnet_api.Models.Ingredient", b =>
+                {
+                    b.Navigation("IngredientLists");
                 });
 
             modelBuilder.Entity("dotnet_api.Models.Recipe", b =>
                 {
-                    b.Navigation("Ingredients");
+                    b.Navigation("IngredientLists");
                 });
 
             modelBuilder.Entity("dotnet_api.Models.User", b =>

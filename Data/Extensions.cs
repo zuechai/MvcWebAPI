@@ -8,8 +8,7 @@ public static class Extensions
             using (IServiceScope? scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services
-                                            .GetRequiredService<RecipeContext>();
+                var context = services.GetRequiredService<RecipeContext>();
                 context.Database.EnsureCreated();
                 DbInit.Init(context);
             }

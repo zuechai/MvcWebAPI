@@ -22,5 +22,5 @@ public class User
     [Timestamp]
     public DateTime? CreatedAt { get; set; }
 
-    public List<Recipe>? Recipes { get; set; }
+    public ICollection<Recipe>? Recipes { get; set; }
 }

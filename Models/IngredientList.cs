@@ -11,12 +11,10 @@ public class IngredientList
     public string? Measurement { get; set; }
 
     [Required]
-    public Ingredient? Ingredient { get; set; }
+    public long? IngredientId { get; set; }
 
     public string? Preparation { get; set; }
 
-
     [Required]
     public long RecipeId { get; set; }
-    public Recipe? Recipe { get; set; }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnet_api.Models;
 
@@ -15,7 +16,4 @@ public class Method
 
     [Required]
     public long RecipeId { get; set; }
-    [Required]
-    public Recipe? Recipe { get; set; }
-
 }

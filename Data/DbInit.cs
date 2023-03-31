@@ -25,19 +25,19 @@ public static class DbInit
         };
 
         // Add Recipe
-        Recipe guacamole = new Recipe
+        Recipe guacamole = new()
         {
             Title = "Guacamole",
             ImagePath = null,
-            User = user,
+            UserId = user.Id,
         };
 
         // Add ingredients
-        Ingredient onion = new Ingredient { Name = "onion" };
-        Ingredient avocado = new Ingredient { Name = "avocado" };
-        Ingredient cilantro = new Ingredient { Name = "cilantro" };
-        Ingredient jalapeno = new Ingredient { Name = "jalapeno" };
-        Ingredient limeJuice = new Ingredient { Name = "lime juice" };
+        Ingredient onion = new() { Name = "onion" };
+        Ingredient avocado = new() { Name = "avocado" };
+        Ingredient cilantro = new() { Name = "cilantro" };
+        Ingredient jalapeno = new() { Name = "jalapeno" };
+        Ingredient limeJuice = new() { Name = "lime juice" };
 
         context.Add(onion);
         context.Add(avocado);
@@ -51,37 +51,40 @@ public static class DbInit
             new IngredientList
             {
                 Measurement = "2 tablespoons",
-                Ingredient = onion,
-                Preparation = "brunoise",
-                Recipe = guacamole
+                IngredientId = onion.Id,
+                RecipeId = guacamole.Id
             },
             new IngredientList
             {
                 Measurement = "2 avocados",
-                Ingredient = avocado,
-                Recipe = guacamole
+                IngredientId = avocado.Id,
+                RecipeId = guacamole.Id
             },
             new IngredientList
             {
                 Measurement = "2 tablespoons",
-                Ingredient = cilantro,
-                Preparation = "chiffonade",
-                Recipe = guacamole
+                IngredientId = cilantro.Id,
+                RecipeId = guacamole.Id
             },
             new IngredientList
             {
                 Measurement = "2 teaspoons",
-                Ingredient = jalapeno,
-                Preparation = "brunoise",
-                Recipe = guacamole
+                IngredientId = jalapeno.Id,
+                RecipeId = guacamole.Id
             },
             new IngredientList
             {
                 Measurement = "1 tablespoon",
-                Ingredient = limeJuice,
-                Recipe = guacamole
+                IngredientId = limeJuice.Id,
+                RecipeId = guacamole.Id
             }
         };
+
+        ingredients[0].Preparation = "brunoiseeee";
+        ingredients[3].Preparation = "brunoise";
+        ingredients[2].Preparation = "chiffonade";
+
+
 
         // add Methods
         Method[] methods = new Method[]
@@ -90,25 +93,25 @@ public static class DbInit
             {
                 StepNumber = 1,
                 Instruction = "Add everything but the lime to a bowl or large mortar and pestle then mash the avocado into a chunky paste so that the pieces are pea-sized.",
-                Recipe = guacamole
+                RecipeId = guacamole.Id
             },
             new Method
             {
                 StepNumber = 2,
                 Instruction = "Gently stir in lime juice and 1/4 teaspoon kosher salt or to taste.",
-                Recipe = guacamole
+                RecipeId = guacamole.Id
             },
             new Method
             {
                 StepNumber = 3,
                 Instruction = "Serve immediately or store in an airtight container with plastic wrap press onto the exposed surface.",
-                Recipe = guacamole
+                RecipeId = guacamole.Id
             }
         };
 
         context.Users.Add(user);
         context.Recipes.Add(guacamole);
-        context.IngrdientsLists.AddRange(ingredients);
+        context.IngredientsLists.AddRange(ingredients);
         context.Methods.AddRange(methods);
         context.SaveChanges();
     }
