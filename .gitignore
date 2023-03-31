@@ -101,6 +101,9 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+# Visual Studio Code folder
+.vscode
+
 # Chutzpah Test files
 _Chutzpah*
 
